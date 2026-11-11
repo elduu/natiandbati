@@ -18,7 +18,7 @@ import { Location } from "@/sections/Location";
 import { Rsvp } from "@/sections/Rsvp";
 import { Story } from "@/sections/Story";
 import { Wishes } from "@/sections/Wishes";
-
+import { FamilyInvitation} from "@/sections/FamilyInvitation";
 function WeddingExperience() {
   const [opened, setOpened] = useState(false);
   const music = useBackgroundMusic();
@@ -42,6 +42,7 @@ function WeddingExperience() {
       <main>
         <Hero />
         <Countdown />
+         <FamilyInvitation />
         <EventDetails />
         <About />
         <Story />
@@ -49,6 +50,7 @@ function WeddingExperience() {
         <Gallery />
         <GalleryMarquee />
         <GuestGallery />
+       
         <Rsvp />
         <Gifts />
         <Wishes />

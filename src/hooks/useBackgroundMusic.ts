@@ -1,78 +1,63 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 /**
- * Soft romantic arpeggio synthesised in the browser with the Web Audio API,
- * so no audio file needs to be shipped.
+ * Plays the wedding song that is stored in the project's `public` folder.
+ * The file must be at: public/music/wedding.mp3
+ * (In the code the address has no "public" in it: Vite serves that folder from the site's root.)
  */
-const CHORDS = [
-  [261.63, 329.63, 392.0, 523.25], // C
-  [220.0, 261.63, 329.63, 440.0], // Am
-  [174.61, 220.0, 261.63, 349.23], // F
-  [196.0, 246.94, 293.66, 392.0], // G
-];
-const ARPEGGIO = [0, 1, 2, 3, 2, 1, 2, 3];
-const NOTE_INTERVAL_MS = 400;
+const MUSIC_SRC = `${import.meta.env.BASE_URL}music/wedding.mp3`;
 
-export function useBackgroundMusic() {
+export function useBackgroundMusic(src: string = MUSIC_SRC) {
   const [playing, setPlaying] = useState(false);
-  const audioRef = useRef<AudioContext | null>(null);
-  const timerRef = useRef<number | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // The audio element is created on the first start, so the file is not downloaded before it is needed.
+  const getAudio = useCallback(() => {
+    if (!audioRef.current) {
+      const audio = new Audio(src);
+      audio.loop = true;
+      audio.preload = "auto";
+      audio.volume = 0.8; // 0 = silent, 1 = full volume
+      // Keep `playing` in step with the real state (also when the phone's media controls pause it).
+      audio.addEventListener("play", () => setPlaying(true));
+      audio.addEventListener("pause", () => setPlaying(false));
+      audio.addEventListener("error", () => {
+        console.error("[music] The file could not be loaded:", src, audio.error);
+        setPlaying(false);
+      });
+      audioRef.current = audio;
+    }
+    return audioRef.current;
+  }, [src]);
+
+  /** Must be called straight from a tap/click handler, or the browser will block the sound. */
+  const start = useCallback(() => {
+    getAudio()
+      .play()
+      .catch((error) => {
+        console.error("[music] play() was blocked or failed:", error);
+        setPlaying(false);
+      });
+  }, [getAudio]);
 
   const stop = useCallback(() => {
-    if (timerRef.current !== null) window.clearInterval(timerRef.current);
-    timerRef.current = null;
-    void audioRef.current?.close();
-    audioRef.current = null;
-    setPlaying(false);
+    audioRef.current?.pause();
   }, []);
 
-  const start = useCallback(() => {
-    if (audioRef.current) return;
+  const toggle = useCallback(() => {
+    const audio = audioRef.current;
+    if (audio && !audio.paused) stop();
+    else start();
+  }, [start, stop]);
 
-    const audio = new AudioContext();
-    audioRef.current = audio;
-
-    const master = audio.createGain();
-    master.gain.value = 0.12;
-    master.connect(audio.destination);
-
-    const playNote = (frequency: number, at: number) => {
-      const osc = audio.createOscillator();
-      const gain = audio.createGain();
-      osc.type = "sine";
-      osc.frequency.value = frequency;
-      gain.gain.setValueAtTime(0, at);
-      gain.gain.linearRampToValueAtTime(0.5, at + 0.03);
-      gain.gain.exponentialRampToValueAtTime(0.001, at + 2.4);
-      osc.connect(gain).connect(master);
-      osc.start(at);
-      osc.stop(at + 2.5);
-    };
-
-    let step = 0;
-    const tick = () => {
-      const chord = CHORDS[Math.floor(step / ARPEGGIO.length) % CHORDS.length];
-      const at = audio.currentTime + 0.02;
-      playNote(chord[ARPEGGIO[step % ARPEGGIO.length]], at);
-      if (step % ARPEGGIO.length === 0) playNote(chord[0] / 2, at); // bass note on the downbeat
-      step++;
-    };
-
-    tick();
-    timerRef.current = window.setInterval(tick, NOTE_INTERVAL_MS);
-
-    audio
-      .resume()
-      .then(() => {
-        if (audioRef.current === audio) setPlaying(audio.state === "running");
-      })
-      .catch(stop);
-  }, [stop]);
-
-  const toggle = useCallback(() => (audioRef.current ? stop() : start()), [start, stop]);
-
-  // Release the audio context when the app unmounts.
-  useEffect(() => stop, [stop]);
+  // Stop the music when the app unmounts.
+  useEffect(
+    () => () => {
+      audioRef.current?.pause();
+      audioRef.current = null;
+    },
+    [],
+  );
 
   return { playing, start, stop, toggle };
 }

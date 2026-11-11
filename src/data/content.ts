@@ -22,16 +22,15 @@ export const people = [
     name: wedding.bride,
     role: "The Bride",
     img: img.bride,
-    bio: "An architect with a love for old books, slow mornings, and wildflowers. Amara fills every room with warmth and finds beauty in the smallest details — qualities Julian fell for the moment they met.",
+    bio: "A civil engineering graduate who serves her church by leading worship. Singing is her great love, and she brings that joy to every room she steps into.",
   },
   {
     name: wedding.groom,
     role: "The Groom",
     img: img.groom,
-    bio: "A film composer who collects vinyl and bad jokes in equal measure. Julian is the steady, gentle heart of every gathering, and he has loved Amara since their very first cup of coffee together.",
+    bio: "A marketing graduate who is building his own business. Playing music is what he loves most, and it fills his life with joy.",
   },
 ] as const;
-
 /* ───────── Love story timeline ───────── */
 export const milestones = [
   {
