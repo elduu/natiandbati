@@ -1,0 +1,9 @@
+// Single import point for every bundled image.
+export { default as hero } from "./hero.jpg";
+export { default as bride } from "./bride.jpg";
+export { default as groom } from "./groom.jpg";
+export { default as g1 } from "./g1.jpg";
+export { default as g2 } from "./g2.jpg";
+export { default as g3 } from "./g3.jpg";
+export { default as g4 } from "./g4.jpg";
+export { default as g5 } from "./g5.jpg";
