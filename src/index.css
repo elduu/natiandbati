@@ -89,12 +89,15 @@
   --secondary: oklch(0.3 0.05 268);
   --secondary-foreground: oklch(0.94 0.02 80);
   --muted: oklch(0.3 0.05 268);
-  --muted-foreground: oklch(0.72 0.03 75);
+  --muted-foreground: oklch(0.78 0.03 75);
   --accent: oklch(0.72 0.05 75);
   --accent-foreground: oklch(0.22 0.05 268);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 15%);
+  --border: oklch(1 0 0 / 16%);
+  --input: oklch(1 0 0 / 18%);
   --ring: oklch(0.7 0.08 75);
+
+  /* Dark sections stay darker than the page in dark mode */
+  --navy: oklch(0.15 0.04 268);
 }
 
 /* ───────────── Base ───────────── */

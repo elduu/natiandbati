@@ -1,4 +1,5 @@
-import { hero } from "@/assets/images";
+import hero from "@/assets/image_4.webp";
+
 import { SECTION_IDS, wedding } from "@/config/site";
 import { usePrefs } from "@/hooks/usePrefs";
 import { scrollToSection } from "@/utils/scroll";
@@ -12,7 +13,7 @@ export function Hero() {
     <section id={SECTION_IDS.home} className="relative flex min-h-svh items-center justify-center overflow-hidden">
       <img
         src={hero}
-        alt={`${wedding.bride} and ${wedding.groom} embracing at golden hour`}
+        alt={`${wedding.groom} and ${wedding.bride} embracing at golden hour`}
         width={1920}
         height={1080}
         className="absolute inset-0 h-full w-full object-cover"
@@ -44,9 +45,9 @@ export function Hero() {
 
         {/* Names stack on phones so long names never overflow, sit inline from `sm` up */}
         <h1 className="mt-3 flex flex-col items-center font-display text-6xl font-medium leading-none tracking-tight sm:flex-row sm:justify-center sm:text-8xl">
-          <span>{wedding.bride}</span>
-          <span className="my-1 font-script text-4xl text-tan sm:mx-3 sm:my-0 sm:text-6xl">&amp;</span>
           <span>{wedding.groom}</span>
+          <span className="my-1 font-script text-4xl text-tan sm:mx-3 sm:my-0 sm:text-6xl">&amp;</span>
+          <span>{wedding.bride}</span>
         </h1>
 
         <div className="mx-auto mt-7 flex max-w-md items-center justify-center gap-3 sm:gap-4" aria-hidden="true">
@@ -55,22 +56,20 @@ export function Hero() {
           <span className="h-px flex-1 bg-cream/40" />
         </div>
 
-        <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-cream/85 sm:text-lg">
-          {t("Two souls, one beautiful journey. Join us as we celebrate the beginning of our forever.")}
-        </p>
+   
 
         <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button size="lg" onClick={() => scrollToSection(SECTION_IDS.rsvp)} className="w-full uppercase tracking-wider shadow-elegant sm:w-auto">
-            {t("RSVP Now")}
+            {t("you are invited")}
           </Button>
-          <Button
+          {/* <Button
             variant="outlineLight"
             size="lg"
             onClick={() => scrollToSection(SECTION_IDS.calendar)}
             className="w-full uppercase tracking-wider sm:w-auto"
           >
-            {t("View Details")}
-          </Button>
+            {t("V")}
+          </Button> */}
         </div>
       </div>
 

@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { hero } from "@/assets/images";
+import hero from "@/assets/image_4.webp";
 import { SECTION_IDS } from "@/config/site";
 import { Modal } from "@/components/ui/Modal";
 import { PlayIcon } from "@/components/ui/icons";
@@ -9,7 +9,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 // TODO: paste the Cloudinary VIDEO link here, for example:
 // "https://res.cloudinary.com/dabc123/video/upload/v1700000000/weddings/engagement.mp4"
-const VIDEO_URL = "PASTE_YOUR_CLOUDINARY_VIDEO_LINK_HERE";
+const VIDEO_URL = "https://res.cloudinary.com/dkfawrhqz/video/upload/v1794478519/Img_1751_1_gml9on.mp4";
 
 // Cloudinary delivers the film in the best format and quality for each guest.
 const PLAY_URL = VIDEO_URL.replace("/video/upload/", "/video/upload/f_auto,q_auto/");

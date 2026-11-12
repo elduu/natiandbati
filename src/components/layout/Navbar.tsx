@@ -62,7 +62,7 @@ export function Navbar() {
           )}
           aria-label="Back to top"
         >
-          {wedding.bride[0]} <span className="font-script text-accent">&amp;</span> {wedding.groom[0]}
+          {wedding.groom[0]} <span className="font-script text-accent">&amp;</span> {wedding.bride[0]}
         </button>
 
         {/* Desktop links */}

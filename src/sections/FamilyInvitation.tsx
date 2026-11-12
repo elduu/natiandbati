@@ -2,8 +2,7 @@ import { wedding } from "@/config/site";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 
-// TODO: the name of the church where the ceremony is held. While this is empty, that sentence is left out.
-const CHURCH_NAME = "";
+const CHURCH_NAME = "Gulele Paulos Muluwengel Church";
 
 const CEREMONY_TIME = "3:00 PM";
 
@@ -23,10 +22,11 @@ export function FamilyInvitation() {
       <Reveal className="text-center">
         <h2 className="text-3xl text-primary sm:text-5xl">Dear Family and Friends</h2>
 
-        <blockquote className="mt-6 text-sm italic leading-7 text-muted-foreground sm:mt-8 sm:text-base">
-          “A cord of three strands is not quickly broken.”
+        <blockquote className="mt-6 text-sm italic leading-7 text-muted-foreground sm:mt-8 sm:text-base sm:leading-8">
+          “O Jeshurun, there is none like God, who rides across the heavens to help you, and upon the clouds in his
+          majesty.”
         </blockquote>
-        <p className="mt-4 font-display text-lg text-foreground sm:mt-6 sm:text-xl">Ecclesiastes 4:12</p>
+        <p className="mt-4 font-display text-lg text-foreground sm:mt-6 sm:text-xl">Deuteronomy 33:26</p>
 
         <p className="mt-8 text-sm leading-7 text-muted-foreground sm:mt-10 sm:text-base sm:leading-8">
           Together with our families, we joyfully invite you to celebrate our marriage on{" "}

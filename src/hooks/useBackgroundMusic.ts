@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 /**
- * Plays the wedding song that is stored in the project's `public` folder.
- * The file must be at: public/music/wedding.mp3
+ * Plays the wedding song stored in the project's `public` folder.
+ * The file must be at: public/m.mp3
  * (In the code the address has no "public" in it: Vite serves that folder from the site's root.)
  */
-const MUSIC_SRC = `${import.meta.env.BASE_URL}music/wedding.mp3`;
+const MUSIC_SRC = `${import.meta.env.BASE_URL}music.m4a`;
 
 export function useBackgroundMusic(src: string = MUSIC_SRC) {
   const [playing, setPlaying] = useState(false);

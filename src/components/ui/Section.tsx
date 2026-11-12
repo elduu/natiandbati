@@ -5,7 +5,7 @@ import { cn } from "@/utils/cn";
 const tones = {
   default: "",
   muted: "bg-secondary/40",
-  dark: "relative overflow-hidden bg-primary text-cream",
+  dark: "relative overflow-hidden bg-navy text-cream",
 } as const;
 
 const widths = {

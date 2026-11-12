@@ -18,19 +18,14 @@ const PLACES: Place[] = [
     id: "church",
     label: "Church",
     query: "9.0054,38.7636",
-    url: "https://maps.app.goo.gl/PASTE_CHURCH_LINK",
+    url: "https://maps.app.goo.gl/5aApw7pS5Avqtb7H8",
   },
-  {
-    id: "bride",
-    label: "Bride’s Home",
-    query: "9.0054,38.7636",
-    url: "https://maps.app.goo.gl/PASTE_BRIDE_LINK",
-  },
+ 
   {
     id: "groom",
     label: "Groom’s Home",
     query: "9.0054,38.7636",
-    url: "https://maps.app.goo.gl/PASTE_GROOM_LINK",
+    url: "https://maps.app.goo.gl/hjCajvbMrgYPzZCE7",
   },
 ];
 

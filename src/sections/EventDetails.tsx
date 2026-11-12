@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { hero } from "@/assets/images";
+import hero from "@/assets/image_14.webp";
 import { SECTION_IDS, wedding } from "@/config/site";
 import { getCalendarLinks } from "@/utils/calendar";
 import { Reveal } from "@/components/ui/Reveal";
@@ -109,7 +109,7 @@ export function EventDetails() {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to bottom, rgba(199, 206, 223, 0.55), rgba(23, 37, 84, 0.85))",
+                "linear-gradient(to bottom, rgba(179, 175, 175, 0.55)))",
             }}
             aria-hidden="true"
           />

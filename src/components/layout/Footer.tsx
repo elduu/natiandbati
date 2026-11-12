@@ -9,7 +9,7 @@ export function Footer() {
     <footer className="relative overflow-hidden bg-primary px-5 py-14 text-cream sm:px-6 sm:py-16">
       <div className="mx-auto max-w-5xl text-center">
         <p className="font-script text-4xl text-tan">
-          {wedding.bride} &amp; {wedding.groom}
+          {wedding.groom} &amp; {wedding.bride}
         </p>
         <p className="mt-2 text-sm uppercase tracking-[0.3em] text-cream/70">{wedding.dateLabel}</p>
         <p className="mt-1 text-sm text-cream/60">{wedding.hashtag}</p>

@@ -3,8 +3,14 @@
  * without touching any markup.
  */
 import { wedding } from "@/config/site";
-import * as img from "@/assets/images";
-
+import * as img from "@/assets/";
+import bride from "@/assets/image_6.webp";
+import groom from "@/assets/image_4.webp";
+import g1 from "@/assets/image_3.webp";
+import g2 from "@/assets/image_3.webp";
+import g3 from "@/assets/image_19.webp";
+import g4 from "@/assets/image_9.webp";
+import g5 from "@/assets/image_5.webp";
 export interface Photo {
   src: string;
   alt: string;
@@ -21,13 +27,13 @@ export const people = [
   {
     name: wedding.bride,
     role: "The Bride",
-    img: img.bride,
+    img: bride,
     bio: "A civil engineering graduate who serves her church by leading worship. Singing is her great love, and she brings that joy to every room she steps into.",
   },
   {
     name: wedding.groom,
     role: "The Groom",
-    img: img.groom,
+    img: groom,
     bio: "A marketing graduate who is building his own business. Playing music is what he loves most, and it fills his life with joy.",
   },
 ] as const;
@@ -37,31 +43,31 @@ export const milestones = [
     year: "Six years ago",
     title: "First Meeting",
     text: "Six years ago, our paths first crossed at a recording studio, where Bati had come to record songs. It was the start of a friendship we never expected would become so much more.",
-    img: img.hero,
+    img: g5,
   },
   {
     year: "Through the years",
     title: "Meeting at Church",
     text: "After that, we met most of the time at church. Week after week, our friendship grew in faith and in the quiet moments we shared.",
-    img: img.g2,
+    img: g1,
   },
   {
     year: "July 12, 2025 · Hamle 5, 2017 E.C.",
     title: "The Proposal",
     text: "A beautiful new chapter began on this day, turning years of friendship and love into a promise of a lifetime.",
-    img: img.g4,
+    img: g2,
   },
   {
     year: "July 19, 2025 · Hamle 12, 2017 E.C.",
     title: "Shemgelna",
     text: "A week later, our families came together for the Shemgelna, honoring our culture and the traditions passed down to us, and blessing our journey.",
-    img: img.g5,
+    img: g3,
   },
   {
     year: "November 21, 2026 · Hidar 12, 2019 E.C.",
     title: "Our Wedding",
     text: "And now, surrounded by everyone we love, we begin our greatest adventure yet: a lifetime, hand in hand.",
-    img: img.hero,
+    img: g4,
   },
 ] as const;
 

@@ -1,4 +1,4 @@
-import { hero } from "@/assets/images";
+import hero from "@/assets/image_3.webp";
 import { wedding } from "@/config/site";
 import { usePrefs } from "@/hooks/usePrefs";
 import { Button } from "@/components/ui/Button";
@@ -24,7 +24,7 @@ export function Invitation({ onOpen }: { onOpen: () => void }) {
       <div className="relative h-56 w-48 overflow-hidden rounded-t-full border border-accent/40 p-1 sm:h-64 sm:w-56">
         <img
           src={hero}
-          alt={`${wedding.bride} & ${wedding.groom}`}
+          alt={`${wedding.groom} & ${wedding.bride}`}
           className="h-full w-full rounded-t-full object-cover"
           fetchPriority="high"
         />
@@ -38,7 +38,7 @@ export function Invitation({ onOpen }: { onOpen: () => void }) {
       </h1>
       <div className="my-6 h-px w-16 bg-accent" aria-hidden="true" />
       <p className="text-sm text-muted-foreground">{wedding.dateLabel}</p>
-      <p className="mt-2 font-display text-xl">{wedding.venue.name}</p>
+     
 
       <Button variant="solid" size="lg" onClick={onOpen} className="mt-9 max-w-full whitespace-normal">
         <MailOpenIcon size={22} />
