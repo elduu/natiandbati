@@ -2,22 +2,27 @@
  * Central wedding configuration.
  * Edit the values below to personalise the whole site.
  */
+
 export const wedding = {
- bride: "Bethel",
+  bride: "Bethel",
   groom: "Natnael",
 
   hashtag: "#AmaraAndJulianForever",
+
   /** Local date & time of the ceremony — drives the countdown and calendar links. */
   date: new Date("2026-11-21T16:00:00"),
+
   dateLabel: "November 21, 2026",
   ceremonyTime: "3:00 PM",
   receptionTime: "6:30 PM",
+
   venue: {
     name: "Ashford Estate",
     address: "637 Province Line Road, Allentown, NJ 08501",
     short: "Allentown, New Jersey",
     mapsQuery: "Ashford Estate, 637 Province Line Road, Allentown, NJ 08501",
   },
+
   contact: {
     email: "inviteyours.com",
     phone: "090951370",
@@ -38,11 +43,17 @@ export const SECTION_IDS = {
   gifts: "gifts",
   wishes: "wishes",
   location: "location",
+
+  invitation: "invitation",
+  familyInvitation: "familyInvitation",
 } as const;
 
 export type SectionId = (typeof SECTION_IDS)[keyof typeof SECTION_IDS];
 
-export const navLinks: ReadonlyArray<{ id: SectionId; label: string }> = [
+export const navLinks: ReadonlyArray<{
+  id: SectionId;
+  label: string;
+}> = [
   { id: SECTION_IDS.home, label: "Home" },
   { id: SECTION_IDS.story, label: "Our Story" },
   { id: SECTION_IDS.about, label: "About Us" },
@@ -52,6 +63,8 @@ export const navLinks: ReadonlyArray<{ id: SectionId; label: string }> = [
   { id: SECTION_IDS.gifts, label: "Gifts" },
   { id: SECTION_IDS.location, label: "Location" },
   { id: SECTION_IDS.wishes, label: "Wishes" },
+  { id: SECTION_IDS.invitation, label: "Invitation" },
+  { id: SECTION_IDS.familyInvitation, label: "Family Invitation" },
 ];
 
 /** Social profiles shown in the footer. Replace `href` with real URLs. */

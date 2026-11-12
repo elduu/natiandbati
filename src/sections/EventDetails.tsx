@@ -1,7 +1,7 @@
-import { useState } from "react";
+
 import hero from "@/assets/image_14.webp";
 import { SECTION_IDS, wedding } from "@/config/site";
-import { getCalendarLinks } from "@/utils/calendar";
+
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -44,46 +44,7 @@ const events = [
   },
 ];
 
-function AddToCalendar() {
-  const [open, setOpen] = useState(false);
-  const links = getCalendarLinks();
 
-  const options = [
-    { label: "Google Calendar", href: links.google, download: false },
-    { label: "Apple Calendar", href: links.apple, download: true },
-    { label: "Outlook", href: links.outlook, download: false },
-  ];
-
-  return (
-    <div className="relative">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-center rounded-xl border border-accent bg-accent/10 py-3 text-sm font-semibold text-primary transition-colors hover:bg-accent/20 sm:rounded-2xl sm:py-4 sm:text-base"
-        aria-expanded={open}
-        aria-haspopup="true"
-      >
-        Add to Calendar
-      </button>
-
-      {open && (
-        <div className="absolute z-20 mt-2 w-full overflow-hidden rounded-xl border border-border bg-popover shadow-elegant sm:rounded-2xl">
-          {options.map((opt) => (
-            <a
-              key={opt.label}
-              href={opt.href}
-              onClick={() => setOpen(false)}
-              {...(opt.download ? { download: "wedding.ics" } : { target: "_blank", rel: "noreferrer" })}
-              className="block border-b border-border/50 px-4 py-3 text-sm text-foreground transition-colors last:border-0 hover:bg-secondary sm:px-5 sm:text-base"
-            >
-              {opt.label}
-            </a>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
 
 export function EventDetails() {
   return (
