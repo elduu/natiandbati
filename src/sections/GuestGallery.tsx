@@ -7,7 +7,7 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 // TODO: your Telegram bot link, for example "https://t.me/NatiAndBatiBot"
-const BOT_URL = "https://t.me/YOUR_BOT_USERNAME";
+const BOT_URL = "https://t.me/natiandbati_bot";
 
 const API_BASE = "https://apibase.inviteyours.com/api";
 const WEDDING_SLUG = "natiandbati";
