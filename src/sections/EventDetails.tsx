@@ -1,7 +1,8 @@
-
-import hero from "@/assets/image_14.webp";
+import { useState } from "react";
+import  hero  from "@/assets/image_4.webp";
 import { SECTION_IDS, wedding } from "@/config/site";
-
+import { usePrefs } from "@/hooks/usePrefs";
+import { getCalendarLinks } from "@/utils/calendar";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -44,9 +45,51 @@ const events = [
   },
 ];
 
+function AddToCalendar() {
+  const { t } = usePrefs();
+  const [open, setOpen] = useState(false);
+  const links = getCalendarLinks();
 
+  const options = [
+    { label: "Google Calendar", href: links.google, download: false },
+    { label: "Apple Calendar", href: links.apple, download: true },
+    { label: "Outlook", href: links.outlook, download: false },
+  ];
+
+  return (
+    <div className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex w-full items-center justify-center rounded-xl border border-accent bg-accent/10 py-3 text-sm font-semibold text-primary transition-colors hover:bg-accent/20 sm:rounded-2xl sm:py-4 sm:text-base"
+        aria-expanded={open}
+        aria-haspopup="true"
+      >
+        {t("")}
+      </button>
+
+      {open && (
+        <div className="absolute z-20 mt-2 w-full overflow-hidden rounded-xl border border-border bg-popover shadow-elegant sm:rounded-2xl">
+          {options.map((opt) => (
+            <a
+              key={opt.label}
+              href={opt.href}
+              onClick={() => setOpen(false)}
+              {...(opt.download ? { download: "wedding.ics" } : { target: "_blank", rel: "noreferrer" })}
+              className="block border-b border-border/50 px-4 py-3 text-sm text-foreground transition-colors last:border-0 hover:bg-secondary sm:px-5 sm:text-base"
+            >
+              {opt.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function EventDetails() {
+  const { t } = usePrefs();
+
   return (
     <Section id={SECTION_IDS.calendar} tone="muted" width="5xl">
       <SectionHeading
@@ -65,47 +108,45 @@ export function EventDetails() {
             loading="lazy"
             className="absolute inset-0 h-full w-full scale-110 object-cover blur-md"
           />
-          {/* Blue shade: lighter at the top, deeper at the bottom */}
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to bottom, rgba(179, 175, 175, 0.55)))",
+                "linear-gradient(to bottom, rgba(37, 99, 235, 0.55), rgba(23, 37, 84, 0.85))",
             }}
             aria-hidden="true"
           />
 
           <div className="relative">
-            <p className="text-xs uppercase tracking-[0.25em] text-sky-200 sm:text-sm sm:tracking-[0.3em]">{weekday}</p>
-            <p className="my-2 font-display text-7xl font-semibold leading-none text-white sm:my-3 sm:text-8xl">
-              {dayOfMonth}
+            <p className="text-[0.65rem] uppercase tracking-[0.2em] text-sky-200 sm:text-sm sm:tracking-[0.3em]">{t(weekday)}</p>
+            <p className="my-1.5 font-display text-5xl font-semibold leading-none text-white sm:my-3 sm:text-8xl">
+              {t(dayOfMonth)}
             </p>
-            <p className="text-xs uppercase tracking-[0.25em] text-sky-200 sm:text-sm sm:tracking-[0.3em]">{monthYear}</p>
+            <p className="text-[0.65rem] uppercase tracking-[0.2em] text-sky-200 sm:text-sm sm:tracking-[0.3em]">{t(monthYear)}</p>
           </div>
         </div>
 
         <div className="flex flex-col gap-3 sm:gap-5">
           {events.map((event, index) => (
             <div key={event.title} className="flex items-start gap-3 rounded-xl bg-card p-4 shadow-soft sm:gap-4 sm:rounded-2xl sm:p-6">
-              {/* Number badge instead of an icon */}
               <span
-                className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-cream sm:size-9 sm:text-sm"
+                className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground sm:size-9 sm:text-sm"
                 aria-hidden="true"
               >
                 {index + 1}
               </span>
               <div className="min-w-0">
                 <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1 sm:gap-x-3">
-                  <h3 className="text-base font-medium text-primary sm:text-2xl">{event.title}</h3>
-                  <span className="rounded-full bg-accent/20 px-2.5 py-0.5 text-xs font-semibold text-accent-foreground sm:px-3 sm:text-sm">
-                    {event.time}
+                  <h3 className="text-base font-medium text-primary sm:text-2xl">{t(event.title)}</h3>
+                  <span className="rounded-full bg-accent/20 px-2.5 py-0.5 text-xs font-semibold text-primary sm:px-3 sm:text-sm">
+                    {t(event.time)}
                   </span>
                 </div>
-                <p className="mt-1 text-sm text-muted-foreground sm:text-base">{event.desc}</p>
+                <p className="mt-1 text-sm text-muted-foreground sm:text-base">{t(event.desc)}</p>
               </div>
             </div>
           ))}
-         
+          <AddToCalendar />
         </div>
       </Reveal>
     </Section>

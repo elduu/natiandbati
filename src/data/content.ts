@@ -5,12 +5,12 @@
 import { wedding } from "@/config/site";
 import * as img from "@/assets/";
 import bride from "@/assets/image_6.webp";
-import groom from "@/assets/image_4.webp";
-import g1 from "@/assets/image_3.webp";
+import groom from "@/assets/image_23.webp";
+import g1 from "@/assets/image_24.webp";
 import g2 from "@/assets/image_3.webp";
 import g3 from "@/assets/image_19.webp";
-import g4 from "@/assets/image_9.webp";
-import g5 from "@/assets/image_5.webp";
+import g4 from "@/assets/image_4.webp";
+import g5 from "@/assets/image_20.webp";
 export interface Photo {
   src: string;
   alt: string;

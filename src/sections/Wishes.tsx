@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState, type CSSProperties } from "react";
 import { SECTION_IDS } from "@/config/site";
+import { usePrefs } from "@/hooks/usePrefs";
 import { Modal } from "@/components/ui/Modal";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -35,7 +36,7 @@ function normalizeWishes(payload: unknown): Wish[] {
     .filter((wish) => wish.name && wish.text);
 }
 
-/** Scrolling card: the wish is cut after 3 lines and ends with "…". */
+/** Scrolling card: the wish is cut after 3 lines and ends with "…". Guest text is shown as written. */
 function WishCard({ name, text }: { name: string; text: string }) {
   return (
     <figure className="flex h-52 w-64 shrink-0 flex-col justify-between overflow-hidden rounded-2xl bg-card p-5 shadow-soft sm:h-56 sm:w-80 sm:p-6">
@@ -51,6 +52,7 @@ function WishCard({ name, text }: { name: string; text: string }) {
 }
 
 export function Wishes() {
+  const { t } = usePrefs();
   const [wishes, setWishes] = useState<Wish[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -92,17 +94,17 @@ export function Wishes() {
         />
       </div>
 
-      {loading && <p className="text-center text-sm text-muted-foreground">Loading wishes...</p>}
+      {loading && <p className="text-center text-sm text-muted-foreground">{t("Loading wishes...")}</p>}
 
       {!loading && error && (
         <p className="px-5 text-center text-sm text-muted-foreground">
-          Could not load the wishes. Please try again later.
+          {t("Could not load the wishes. Please try again later.")}
         </p>
       )}
 
       {!loading && !error && wishes.length === 0 && (
         <p className="px-5 text-center text-sm text-muted-foreground">
-          No wishes yet. Be the first to send one in the RSVP section!
+          {t("No wishes yet. Be the first to send one in the RSVP section!")}
         </p>
       )}
 
@@ -132,24 +134,23 @@ export function Wishes() {
               onClick={() => setOpen(true)}
               className="inline-flex items-center justify-center rounded-full border border-accent bg-accent/10 px-5 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-primary transition-colors hover:bg-accent/20 sm:px-6 sm:py-3 sm:text-sm"
             >
-              View all wishes ({wishes.length})
+              {t("View all wishes")} ({wishes.length})
             </button>
           </div>
         </>
       )}
 
       {open && (
-        <Modal label="All wishes" onClose={close} overlayClassName="bg-black/85">
+        <Modal label={t("All wishes")} onClose={close} overlayClassName="bg-black/85">
           <div className="max-h-[88svh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-background p-4 sm:p-6">
             <h3 className="mb-4 pr-8 font-display text-xl font-medium text-primary sm:text-2xl">
-              All wishes ({wishes.length})
+              {t("All wishes")} ({wishes.length})
             </h3>
 
             <div className="divide-y divide-border">
               {wishes.map((wish, i) => (
                 <article key={`${wish.id}-${i}`} className="py-4 sm:py-5">
                   <h4 className="break-words font-script text-2xl text-primary">{wish.name}</h4>
-                  {/* The full wish, nothing cut */}
                   <p className="mt-1 whitespace-pre-line break-words text-sm leading-relaxed text-muted-foreground sm:text-base">
                     {wish.text}
                   </p>

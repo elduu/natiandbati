@@ -45,31 +45,21 @@ export function Hero() {
 
         {/* Names stack on phones so long names never overflow, sit inline from `sm` up */}
         <h1 className="mt-3 flex flex-col items-center font-display text-6xl font-medium leading-none tracking-tight sm:flex-row sm:justify-center sm:text-8xl">
-          <span>{wedding.groom}</span>
+          <span>{t(wedding.groom)}</span>
           <span className="my-1 font-script text-4xl text-tan sm:mx-3 sm:my-0 sm:text-6xl">&amp;</span>
-          <span>{wedding.bride}</span>
+          <span>{t(wedding.bride)}</span>
         </h1>
 
         <div className="mx-auto mt-7 flex max-w-md items-center justify-center gap-3 sm:gap-4" aria-hidden="true">
           <span className="h-px flex-1 bg-cream/40" />
-          <span className="text-xs uppercase tracking-[0.25em] text-cream/90 sm:text-sm sm:tracking-[0.3em]">{wedding.dateLabel}</span>
+          <span className="text-xs uppercase tracking-[0.25em] text-cream/90 sm:text-sm sm:tracking-[0.3em]">{t(wedding.dateLabel)}</span>
           <span className="h-px flex-1 bg-cream/40" />
         </div>
-
-   
 
         <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button size="lg" onClick={() => scrollToSection(SECTION_IDS.rsvp)} className="w-full uppercase tracking-wider shadow-elegant sm:w-auto">
             {t("you are invited")}
           </Button>
-          {/* <Button
-            variant="outlineLight"
-            size="lg"
-            onClick={() => scrollToSection(SECTION_IDS.calendar)}
-            className="w-full uppercase tracking-wider sm:w-auto"
-          >
-            {t("V")}
-          </Button> */}
         </div>
       </div>
 

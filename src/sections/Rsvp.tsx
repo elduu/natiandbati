@@ -1,5 +1,6 @@
 import { useState, type FormEvent, type ReactNode } from "react";
 import { SECTION_IDS } from "@/config/site";
+import { usePrefs } from "@/hooks/usePrefs";
 import { cn } from "@/utils/cn";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
@@ -37,6 +38,7 @@ function Field({ id, label, error, children }: { id: string; label: string; erro
   );
 }
 
+// Messages stay in English here; they are translated when shown.
 function validate(data: FormData): Errors {
   const errors: Errors = {};
   if (!String(data.get("name") ?? "").trim()) errors.name = "Please enter your name.";
@@ -45,6 +47,7 @@ function validate(data: FormData): Errors {
 }
 
 export function Rsvp() {
+  const { t } = usePrefs();
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [attending, setAttending] = useState<Attendance>("yes");
@@ -95,27 +98,27 @@ export function Rsvp() {
           >
             ✓
           </div>
-          <h3 className="font-script text-4xl text-accent">Thank you!</h3>
-          <p className="mt-2 text-2xl font-medium text-primary">Your response has been received</p>
+          <h3 className="font-script text-4xl text-accent">{t("Thank you!")}</h3>
+          <p className="mt-2 text-2xl font-medium text-primary">{t("Your response has been received")}</p>
           <p className="mx-auto mt-3 max-w-md text-muted-foreground">
             {attending === "yes"
-              ? "We're overjoyed that you'll be part of our special day."
-              : "You will be missed, and we're grateful you let us know."}
+              ? t("We're overjoyed that you'll be part of our special day.")
+              : t("You will be missed, and we're grateful you let us know.")}
           </p>
           <Button variant="outline" onClick={() => setSubmitted(false)} className="mt-7">
-            Submit another response
+            {t("Submit another response")}
           </Button>
         </div>
       ) : (
         <Reveal as="form" onSubmit={handleSubmit} noValidate className="grid gap-5 rounded-3xl bg-card p-6 shadow-elegant sm:p-10">
-          <Field id="name" label="Full Name" error={errors.name}>
+          <Field id="name" label={t("Full Name")} error={errors.name ? t(errors.name) : undefined}>
             <input
               id="name"
               name="name"
               type="text"
               autoComplete="name"
               className={inputClass}
-              placeholder="Your full name"
+              placeholder={t("Your full name")}
               maxLength={100}
               aria-invalid={!!errors.name}
               aria-describedby={errors.name ? "name-error" : undefined}
@@ -123,7 +126,7 @@ export function Rsvp() {
           </Field>
 
           <fieldset>
-            <legend className="mb-2 block text-sm font-medium text-foreground">Will you attend?</legend>
+            <legend className="mb-2 block text-sm font-medium text-foreground">{t("Will you attend?")}</legend>
             <div className="grid grid-cols-1 gap-3 min-[420px]:grid-cols-2">
               {attendanceOptions.map((option) => (
                 <label
@@ -143,20 +146,20 @@ export function Rsvp() {
                     onChange={() => setAttending(option.value)}
                     className="sr-only"
                   />
-                  {option.label}
+                  {t(option.label)}
                 </label>
               ))}
             </div>
           </fieldset>
 
-          <Field id="wish" label="Your Wish for the Couple" error={errors.wish}>
+          <Field id="wish" label={t("Your Wish for the Couple")} error={errors.wish ? t(errors.wish) : undefined}>
             <textarea
               id="wish"
               name="wish"
               rows={4}
               className={inputClass}
               maxLength={500}
-              placeholder="Share your well wishes..."
+              placeholder={t("Share your well wishes...")}
               aria-invalid={!!errors.wish}
               aria-describedby={errors.wish ? "wish-error" : undefined}
             />
@@ -164,12 +167,12 @@ export function Rsvp() {
 
           {errors.submit && (
             <p className="text-sm text-destructive" role="alert">
-              {errors.submit}
+              {t(errors.submit)}
             </p>
           )}
 
           <Button type="submit" size="lg" disabled={submitting} className="mt-2 w-full py-4 uppercase tracking-wider">
-            {submitting ? "Sending..." : "Send RSVP"}
+            {submitting ? t("Sending...") : t("Send RSVP")}
           </Button>
         </Reveal>
       )}

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { SECTION_IDS } from "@/config/site";
+import { usePrefs } from "@/hooks/usePrefs";
 import { Modal } from "@/components/ui/Modal";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
@@ -69,6 +70,7 @@ async function downloadPhoto(url: string, index: number) {
 
 /** Guests send photos to our Telegram bot; this section links to the bot and shows every photo sent. */
 export function GuestGallery() {
+  const { t } = usePrefs();
   const [open, setOpen] = useState(false);
   const [photos, setPhotos] = useState<GuestPhoto[]>([]);
   const [loading, setLoading] = useState(false);
@@ -107,48 +109,49 @@ export function GuestGallery() {
       />
 
       <Reveal className="mx-auto max-w-xl rounded-2xl border border-accent/40 bg-secondary/30 px-5 py-8 text-center sm:rounded-3xl sm:px-10 sm:py-10">
-        <p className="text-base font-medium text-primary sm:text-lg">Share your photos</p>
+        <p className="text-base font-medium text-primary sm:text-lg">{t("Share your photos")}</p>
         <p className="mx-auto mt-2 max-w-sm text-sm text-muted-foreground sm:text-base">
-          Tap the button, open our Telegram bot and send your photos. Then come back to see everyone's.
+          {t("Tap the button, open our Telegram bot and send your photos. Then come back to see everyone's.")}
         </p>
 
         <div className="mt-5 flex flex-col items-center gap-2.5 sm:mt-6 sm:flex-row sm:justify-center sm:gap-3">
-  <a
-    href={BOT_URL}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="inline-flex w-fit items-center justify-center rounded-full bg-primary px-5 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-cream shadow-soft transition-opacity hover:opacity-90 sm:px-6 sm:py-3 sm:text-sm"
-  >
-    Send photos on Telegram
-  </a>
-  <button
-    type="button"
-    onClick={() => setOpen(true)}
-    className="inline-flex w-fit items-center justify-center rounded-full border border-accent bg-accent/10 px-5 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-primary transition-colors hover:bg-accent/20 sm:px-6 sm:py-3 sm:text-sm"
-  >
-    View all photos
-  </button>
-</div>
+          <a
+            href={BOT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex w-fit items-center justify-center rounded-full bg-primary px-5 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-primary-foreground shadow-soft transition-opacity hover:opacity-90 sm:px-6 sm:py-3 sm:text-sm"
+          >
+            {t("Send photos on Telegram")}
+          </a>
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="inline-flex w-fit items-center justify-center rounded-full border border-accent bg-accent/10 px-5 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-primary transition-colors hover:bg-accent/20 sm:px-6 sm:py-3 sm:text-sm"
+          >
+            {t("View all photos")}
+          </button>
+        </div>
       </Reveal>
 
       {open && (
-        <Modal label="Guest photos" onClose={close} overlayClassName="bg-black/85">
+        <Modal label={t("Guest photos")} onClose={close} overlayClassName="bg-black/85">
           <div className="max-h-[88svh] w-full max-w-3xl overflow-y-auto rounded-2xl bg-background p-3 sm:p-6">
             <h3 className="mb-4 pr-8 font-display text-xl font-medium text-primary sm:text-2xl">
-              Guest photos{photos.length > 0 ? ` (${photos.length})` : ""}
+              {t("Guest photos")}
+              {photos.length > 0 ? ` (${photos.length})` : ""}
             </h3>
 
-            {loading && <p className="py-12 text-center text-sm text-muted-foreground">Loading photos...</p>}
+            {loading && <p className="py-12 text-center text-sm text-muted-foreground">{t("Loading photos...")}</p>}
 
             {error && !loading && (
               <p className="py-12 text-center text-sm text-muted-foreground">
-                Could not load the photos. Please try again later.
+                {t("Could not load the photos. Please try again later.")}
               </p>
             )}
 
             {!loading && !error && photos.length === 0 && (
               <p className="py-12 text-center text-sm text-muted-foreground">
-                No photos have been shared yet. Be the first!
+                {t("No photos have been shared yet. Be the first!")}
               </p>
             )}
 
@@ -157,7 +160,7 @@ export function GuestGallery() {
                 <figure key={`${photo.id}-${index}`} className="flex flex-col gap-2 sm:gap-3">
                   <img
                     src={photo.url}
-                    alt={photo.sender ? `Photo shared by ${photo.sender}` : `Guest photo ${index + 1}`}
+                    alt={photo.sender ? `${t("Photo shared by")} ${photo.sender}` : `${t("Guest photo")} ${index + 1}`}
                     loading="lazy"
                     className="h-auto w-full rounded-xl bg-secondary/30 object-contain"
                   />
@@ -165,7 +168,7 @@ export function GuestGallery() {
                     <p className="min-w-0 truncate text-xs text-muted-foreground sm:text-sm">
                       {photo.sender ? (
                         <>
-                          Shared by <span className="font-medium text-foreground">{photo.sender}</span>
+                          {t("Shared by")} <span className="font-medium text-foreground">{photo.sender}</span>
                         </>
                       ) : null}
                     </p>
@@ -174,7 +177,7 @@ export function GuestGallery() {
                       onClick={() => downloadPhoto(photo.url, index)}
                       className="shrink-0 rounded-full border border-accent px-4 py-1.5 text-xs font-semibold text-primary transition-colors hover:bg-accent/15 sm:text-sm"
                     >
-                      Download
+                      {t("Download")}
                     </button>
                   </figcaption>
                 </figure>

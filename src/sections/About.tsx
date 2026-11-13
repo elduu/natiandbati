@@ -1,11 +1,14 @@
 import { SECTION_IDS } from "@/config/site";
 import { people } from "@/data/content";
+import { usePrefs } from "@/hooks/usePrefs";
 import { cn } from "@/utils/cn";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function About() {
+  const { t } = usePrefs();
+
   return (
     <Section id={SECTION_IDS.about}>
       <SectionHeading
@@ -23,7 +26,7 @@ export function About() {
                 <div className="absolute -inset-3 -z-10 rounded-3xl bg-linear-to-br from-accent/30 to-tan/20 blur-xl" aria-hidden="true" />
                 <img
                   src={person.img}
-                  alt={`Portrait of ${person.name}, ${person.role}`}
+                  alt={`${t(person.name)}, ${t(person.role)}`}
                   width={900}
                   height={1100}
                   loading="lazy"
@@ -31,10 +34,10 @@ export function About() {
                 />
               </div>
               <div className="text-center md:text-left">
-                <p className="font-script text-3xl text-accent">{person.role}</p>
-                <h3 className="mt-1 text-4xl font-medium text-primary sm:text-5xl">{person.name}</h3>
+                <p className="font-script text-3xl text-accent">{t(person.role)}</p>
+                <h3 className="mt-1 text-4xl font-medium text-primary sm:text-5xl">{t(person.name)}</h3>
                 <div className="mx-auto my-5 h-px w-16 bg-accent/50 md:mx-0" aria-hidden="true" />
-                <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">{person.bio}</p>
+                <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">{t(person.bio)}</p>
               </div>
             </Reveal>
           );

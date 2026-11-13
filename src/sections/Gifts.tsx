@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { SECTION_IDS } from "@/config/site";
+import { usePrefs } from "@/hooks/usePrefs";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
@@ -8,6 +9,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 // Please check the bank name: the account numbers start with 1000, which is the Commercial Bank of Ethiopia format.
 const BANK_NAME = "Commercial Bank of Ethiopia (CBE)";
 
+// Account holder names stay in English letters, so they match what guests see in their bank app.
 const ACCOUNTS = [
   { holder: "Natnael Fitsum", number: "1000481595324" },
   { holder: "Bethel Regassa", number: "1000638455815" },
@@ -49,6 +51,7 @@ function CheckIcon({ className = "" }: { className?: string }) {
 }
 
 export function Gifts() {
+  const { t } = usePrefs();
   const [revealed, setRevealed] = useState(false);
   const [copiedNumber, setCopiedNumber] = useState<string | null>(null);
 
@@ -82,7 +85,7 @@ export function Gifts() {
       {!revealed ? (
         <div className="flex justify-center">
           <Button size="lg" onClick={() => setRevealed(true)} className="uppercase tracking-wider">
-            Send a Gift
+            {t("Send a Gift")}
           </Button>
         </div>
       ) : (
@@ -92,14 +95,13 @@ export function Gifts() {
               const copied = copiedNumber === number;
               return (
                 <Reveal key={number} className="rounded-2xl bg-card p-5 text-center shadow-soft sm:rounded-3xl sm:p-6">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-accent">{BANK_NAME}</span>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-accent">{t(BANK_NAME)}</span>
                   <h3 className="mt-2 text-xl font-medium text-primary sm:text-2xl">{holder}</h3>
 
                   <p className="mt-4 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                    Account number
+                    {t("Account number")}
                   </p>
 
-                  {/* Number with a copy icon beside it */}
                   <div className="mt-1 flex items-center justify-center gap-2">
                     <p className="select-all break-all font-mono text-lg tracking-wider text-foreground sm:text-xl">
                       {number}
@@ -107,8 +109,8 @@ export function Gifts() {
                     <button
                       type="button"
                       onClick={() => copyNumber(number)}
-                      aria-label={`Copy account number of ${holder}`}
-                      title="Copy"
+                      aria-label={`${t("Copy account number")} — ${holder}`}
+                      title={t("Copy account number")}
                       className="grid size-9 shrink-0 place-items-center rounded-full text-primary transition-colors hover:bg-accent/15 active:bg-accent/25"
                     >
                       {copied ? <CheckIcon className="size-5 text-accent" /> : <CopyIcon className="size-5" />}
@@ -117,7 +119,7 @@ export function Gifts() {
 
                   {/* Fixed height so the card does not jump when the note appears */}
                   <p className="mt-1 h-4 text-xs font-medium text-accent" role="status">
-                    {copied ? "Copied!" : ""}
+                    {copied ? t("Copied!") : ""}
                   </p>
                 </Reveal>
               );
@@ -130,7 +132,7 @@ export function Gifts() {
               onClick={() => setRevealed(false)}
               className="text-sm text-muted-foreground underline-offset-4 hover:underline"
             >
-              Hide details
+              {t("Hide details")}
             </button>
           </div>
         </>

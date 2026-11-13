@@ -32,13 +32,12 @@ export function Invitation({ onOpen }: { onOpen: () => void }) {
 
       <p className="mt-7 font-script text-3xl text-primary">{t("You're invited")}</p>
       <h1 className="mt-3 flex flex-wrap items-baseline justify-center gap-x-3 font-display text-5xl leading-tight sm:text-6xl">
-        <span>{wedding.bride}</span>
+        <span>{t(wedding.groom)}</span>
         <span className="font-script text-accent">&amp;</span>
-        <span>{wedding.groom}</span>
+        <span>{t(wedding.bride)}</span>
       </h1>
       <div className="my-6 h-px w-16 bg-accent" aria-hidden="true" />
-      <p className="text-sm text-muted-foreground">{wedding.dateLabel}</p>
-     
+      <p className="text-sm text-muted-foreground">{t(wedding.dateLabel)}</p>
 
       <Button variant="solid" size="lg" onClick={onOpen} className="mt-9 max-w-full whitespace-normal">
         <MailOpenIcon size={22} />

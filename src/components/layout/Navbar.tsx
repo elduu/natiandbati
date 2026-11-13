@@ -9,7 +9,7 @@ import { CloseIcon, MenuIcon } from "@/components/ui/icons";
 
 /** Language + theme toggles. */
 function PrefsControls({ onLight }: { onLight: boolean }) {
-  const { lang, setLang, theme, setTheme } = usePrefs();
+  const { lang, setLang, theme, setTheme, t } = usePrefs();
   const btn = cn(
     "grid h-9 min-w-9 place-items-center rounded-full border px-2 text-xs font-semibold transition-colors hover:border-accent hover:text-accent",
     onLight ? "border-cream/40 text-cream" : "border-border text-foreground",
@@ -17,14 +17,19 @@ function PrefsControls({ onLight }: { onLight: boolean }) {
 
   return (
     <div className="flex items-center gap-2">
-      <button type="button" className={btn} onClick={() => setLang(lang === "en" ? "am" : "en")} aria-label="Switch language">
+      <button
+        type="button"
+        className={btn}
+        onClick={() => setLang(lang === "en" ? "am" : "en")}
+        aria-label={t("Switch language")}
+      >
         {lang === "en" ? "አማ" : "EN"}
       </button>
       <button
         type="button"
         className={btn}
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        aria-label="Toggle dark mode"
+        aria-label={t("Toggle dark mode")}
       >
         {theme === "dark" ? "☀" : "☾"}
       </button>
@@ -52,7 +57,10 @@ export function Navbar() {
         solid ? "bg-background/95 shadow-soft backdrop-blur-md" : "bg-transparent",
       )}
     >
-      <nav className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:gap-4 sm:px-8 sm:py-4" aria-label="Primary">
+      <nav
+        className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:gap-4 sm:px-8 sm:py-4"
+        aria-label={t("Primary navigation")}
+      >
         <button
           type="button"
           onClick={() => goTo(SECTION_IDS.home)}
@@ -60,9 +68,9 @@ export function Navbar() {
             "shrink-0 font-display text-xl font-semibold tracking-wide transition-colors",
             solid ? "text-primary" : "text-cream",
           )}
-          aria-label="Back to top"
+          aria-label={t("Back to top")}
         >
-          {wedding.groom[0]} <span className="font-script text-accent">&amp;</span> {wedding.bride[0]}
+          {t(wedding.groom)[0]} <span className="font-script text-accent">&amp;</span> {t(wedding.bride)[0]}
         </button>
 
         {/* Desktop links */}
@@ -95,7 +103,7 @@ export function Navbar() {
             type="button"
             onClick={() => setOpen((v) => !v)}
             className={cn("grid h-10 w-10 place-items-center lg:hidden", solid ? "text-primary" : "text-cream")}
-            aria-label={open ? "Close menu" : "Open menu"}
+            aria-label={t(open ? "Close menu" : "Open menu")}
             aria-expanded={open}
             aria-controls="mobile-menu"
           >

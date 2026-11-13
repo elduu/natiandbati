@@ -12,8 +12,7 @@ export function Footer() {
           {wedding.groom} &amp; {wedding.bride}
         </p>
         <p className="mt-2 text-sm uppercase tracking-[0.3em] text-cream/70">{wedding.dateLabel}</p>
-        <p className="mt-1 text-sm text-cream/60">{wedding.hashtag}</p>
-
+        
         <nav className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-1" aria-label="Footer">
           {navLinks.map((link) => (
             <button
@@ -55,7 +54,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 border-t border-cream/15 pt-6 text-xs text-cream/50">
-          © {new Date().getFullYear()} {wedding.bride} &amp; {wedding.groom}. {t("Made with love.")}
+          © {new Date().getFullYear()} {wedding.groom} &amp; {wedding.bride}. {t("Made with love.")}
         </div>
       </div>
     </footer>

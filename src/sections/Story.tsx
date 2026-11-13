@@ -1,11 +1,14 @@
 import { SECTION_IDS } from "@/config/site";
 import { milestones } from "@/data/content";
+import { usePrefs } from "@/hooks/usePrefs";
 import { cn } from "@/utils/cn";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function Story() {
+  const { t } = usePrefs();
+
   return (
     <Section id={SECTION_IDS.story} tone="muted" width="5xl">
       <SectionHeading
@@ -27,14 +30,14 @@ export function Story() {
               />
               <img
                 src={m.img}
-                alt={`${m.title} — ${m.year}`}
+                alt={`${t(m.title)} — ${t(m.year)}`}
                 loading="lazy"
                 className={cn("aspect-3/2 w-full rounded-xl object-cover shadow-soft sm:rounded-2xl", i % 2 === 1 && "md:order-2")}
               />
               <div className="flex flex-col justify-center">
-                <span className="font-script text-lg leading-snug text-accent sm:text-3xl">{m.year}</span>
-                <h3 className="mt-1 text-xl font-medium text-primary sm:text-3xl">{m.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:mt-3 sm:text-base">{m.text}</p>
+                <span className="font-script text-lg leading-snug text-accent sm:text-3xl">{t(m.year)}</span>
+                <h3 className="mt-1 text-xl font-medium text-primary sm:text-3xl">{t(m.title)}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:mt-3 sm:text-base">{t(m.text)}</p>
               </div>
             </Reveal>
           ))}

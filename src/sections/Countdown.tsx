@@ -1,9 +1,12 @@
 import { SECTION_IDS, wedding } from "@/config/site";
 import { useCountdown } from "@/hooks/useCountdown";
+import { usePrefs } from "@/hooks/usePrefs";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 
 export function Countdown() {
+ const { t, lang } = usePrefs();
+console.log("lang:", lang, "| Days:", t("Days"), "| title:", t("Our Wedding Day"));
   const { days, hours, minutes, seconds } = useCountdown(wedding.date);
 
   const units = [
@@ -31,10 +34,10 @@ export function Countdown() {
     >
       <div className="text-center">
         <Reveal as="p" className="font-script text-3xl text-tan sm:text-4xl">
-          Counting down to
+          {t("Counting down to")}
         </Reveal>
         <Reveal as="h2" className="mt-2 text-4xl font-medium text-cream sm:text-5xl">
-          Our Wedding Day
+          {t("Our Wedding Day")}
         </Reveal>
 
         <Reveal className="mt-10 grid grid-cols-2 gap-3 sm:mt-12 sm:grid-cols-4 sm:gap-6">
@@ -43,7 +46,7 @@ export function Countdown() {
               <div className="font-display text-5xl font-semibold tabular-nums text-tan sm:text-6xl">
                 {String(unit.value).padStart(2, "0")}
               </div>
-              <div className="mt-2 text-xs uppercase tracking-[0.25em] text-cream/70">{unit.label}</div>
+              <div className="mt-2 text-xs uppercase tracking-[0.25em] text-cream/70">{t(unit.label)}</div>
             </div>
           ))}
         </Reveal>
